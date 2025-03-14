@@ -13,35 +13,6 @@ SCRIPTS_DIR = os.path.join(os.path.dirname(__file__), "scripts")
 def home():
     return render_template('home.html')
 
-@app.route('/login', methods=['GET', 'POST'])
-def login():
-    if request.method == 'POST':
-        email = request.form['email']
-        password = request.form['password']
-
-        # Assuming a function `validate_user` exists to validate user credentials
-        if validate_user(email, password): 
-            session['user'] = email
-            return redirect(url_for('home'))
-        else:
-            return "❌ Login failed. Invalid credentials."
-
-    return render_template('login.html')
-
-@app.route('/signup', methods=['GET', 'POST'])
-def signup():
-    if request.method == 'POST':
-        firstname = request.form['firstname']
-        lastname = request.form['lastname']
-        email = request.form['email']
-        password = request.form['password']
-
-        # Assuming a function `add_user` exists to add a user to the database
-        add_user(firstname, lastname, email, password)
-
-        return redirect(url_for('login'))
-
-    return render_template('signup.html')
 
 @app.route('/about')
 def about():
