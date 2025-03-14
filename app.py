@@ -9,10 +9,20 @@ app.secret_key = "your_secret_key"  # Required for session handling
 # Ensure the scripts folder is found
 SCRIPTS_DIR = os.path.join(os.path.dirname(__file__), "scripts")
 
+# Load movie data
+movies_data = pd.read_csv("./data/movies.csv")
+
+# Extract unique years from the dataset
+movies_data["year"] = movies_data["title"].str.extract(r"\((\d{4})\)").astype("Int64")
+unique_years = sorted(movies_data["year"].dropna().unique().tolist())
+
+# Extract unique genres from the dataset
+unique_genres = sorted(set(genre for sublist in movies_data["genres"].str.split('|').dropna() for genre in sublist))
+
+
 @app.route('/')
 def home():
-    return render_template('home.html')
-
+    return render_template('home.html', years=unique_years, genres=unique_genres)
 
 @app.route('/about')
 def about():
