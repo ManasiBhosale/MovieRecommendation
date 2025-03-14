@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Movie Recommendations</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        body {
+            background-color: #f4f4f9;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+
+        h2 {
+            color: #333;
+            font-size: 2em;
+        }
+
+        table {
+            width: 80%;
+            margin: 0 auto;
+            border-collapse: collapse;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            padding: 12px 18px;
+            text-align: left;
+            border: 1px solid #ddd;
+            font-size: 1em;
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #ddd;
+        }
+
+        .rating {
+            color: #f39c12;
+        }
+
+        .back-button {
+            margin-top: 20px;
+            text-decoration: none;
+            font-size: 1.2em;
+            color: #333;
+            border: 1px solid #333;
+            padding: 10px 20px;
+            border-radius: 5px;
+            background-color: #f0f0f0;
+        }
+
+        .back-button:hover {
+            background-color: #e7e7e7;
+        }
+    </style>
+</head>
+<body>
+    <h2>🎬 Movie Recommendations Based on Your Selection</h2>
+
+    {% if recommendations %}
+    <table>
+        <tr>
+            <th>Movie ID</th>
+            <th>Title</th>
+            <th>Genre</th>
+            <th>Rating</th>
+            <th>Year</th>
+        </tr>
+        {% for movie in recommendations %}
+        <tr>
+            <td>{{ movie['movieId'] }}</td>
+            <td>{{ movie['title'].split('(')[0].strip() }}</td>
+            <td>{{ movie['genres'] }}</td>
+            <td class="rating">{{ '%.2f' % movie['rating'] }}</td>
+            <td>{{ movie['title'].split('(')[-1].split(')')[0] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% else %}
+        <p>No recommendations available at the moment. Please try again later.</p>
+    {% endif %}
+
+    <br>
+    <a href="{{ url_for('home') }}" class="back-button">🏠 Back to Home</a>
+</body>
+</html>

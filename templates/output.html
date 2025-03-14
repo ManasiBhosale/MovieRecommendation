@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Movie Recommendations</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        body {
+            background-color: #f4f4f9;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #333;
+            font-size: 2.5em;
+        }
+
+        table {
+            width: 80%;
+            margin: 0 auto;
+            border-collapse: collapse;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            padding: 12px 18px;
+            text-align: left;
+            border: 1px solid #ddd;
+            font-size: 1em;
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #ddd;
+        }
+
+        .rating {
+            color: #f39c12;
+        }
+
+        .back-button {
+            margin-top: 20px;
+            text-decoration: none;
+            font-size: 1.2em;
+            color: #333;
+            border: 1px solid #333;
+            padding: 10px 20px;
+            border-radius: 5px;
+            background-color: #f0f0f0;
+        }
+
+        .back-button:hover {
+            background-color: #e7e7e7;
+        }
+
+        /* Enhanced styling for the submit button */
+        button[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.1em;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #45a049;
+            transform: scale(1.05);
+        }
+
+        button[type="submit"]:active {
+            background-color: #388e3c;
+            transform: scale(1);
+        }
+    </style>
+</head>
+<body>
+    <h1>Recommended Movies</h1>
+    <p>Select all the movies you've already watched from the list below to get more personalized movie recommendations based on your preferences!</p>
+    {% if movies %}
+    <form action="{{ url_for('recommend_more') }}" method="POST">
+        <table>
+            <tr>
+                <th>Select</th>
+                <th>Movie ID</th>
+                <th>Title</th>
+                <th>Genre</th>
+                <th>Rating</th>
+                <th>Year</th>
+            </tr>
+            {% for movie in movies %}
+            <tr>
+                <td><input type="checkbox" name="watched_movies" value="{{ movie.movieId }}"></td>
+                <td>{{ movie.movieId }}</td>
+                <td>{{ movie.title }}</td>
+                <td>{{ movie.genres }}</td>
+                <td class="rating">{{ '%.2f' % movie.rating }}</td> <!-- Display rating with 2 decimal precision -->
+                <td>{{ movie.title.split('(')[-1].split(')')[0] }}</td> <!-- Extract Year -->
+            </tr>
+            {% endfor %}
+        </table>
+        <br>
+        <button type="submit">Get More Recommendations</button>
+    </form>
+    {% else %}
+        <p>No recommendations found. Please try again.</p>
+    {% endif %}
+
+    <br>
+    <a href="{{ url_for('home') }}" class="back-button">🏠 Back to Home</a>
+</body>
+</html>

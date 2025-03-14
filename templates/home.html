@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home - Movie Recommendation System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        body {
+            background-color: #e6f7ff;
+            font-family: 'Arial', sans-serif;
+            padding: 30px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+            font-size: 3em;
+            margin-bottom: 30px;
+        }
+
+        .form-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        form {
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+            display: inline-block;
+            width: 50%;
+            text-align: left;
+        }
+
+        label {
+            font-size: 1.2em;
+            color: #333;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        select {
+            width: 100%;
+            padding: 10px;
+            font-size: 1.1em;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            font-size: 1.1em;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .login-signup {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+
+
+
+.login-signup a {
+  align-items: center;
+  appearance: none;
+  background-color: #FCFCFD;
+  border-radius: 4px;
+  border-width: 0;
+  box-shadow: rgba(45, 35, 66, 0.4) 0 2px 4px,rgba(45, 35, 66, 0.3) 0 7px 13px -3px,#D6D6E7 0 -3px 0 inset;
+  box-sizing: border-box;
+  color: #36395A;
+  cursor: pointer;
+  display: inline-flex;
+  font-family: "JetBrains Mono",monospace;
+  height: 48px;
+  justify-content: center;
+  line-height: 1;
+  list-style: none;
+  overflow: hidden;
+  padding-left: 16px;
+  padding-right: 16px;
+  position: relative;
+  text-align: left;
+  text-decoration: none;
+  transition: box-shadow .15s,transform .15s;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  white-space: nowrap;
+  will-change: box-shadow,transform;
+  font-size: 18px;
+}
+
+.login-signup:focus {
+  box-shadow: #D6D6E7 0 0 0 1.5px inset, rgba(45, 35, 66, 0.4) 0 2px 4px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
+}
+
+.login-signup a:hover {
+  box-shadow: rgba(45, 35, 66, 0.4) 0 4px 8px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
+  transform: translateY(-2px);
+}
+
+.login-signup:active {
+  box-shadow: #D6D6E7 0 3px 7px inset;
+  transform: translateY(2px);
+}
+        
+    </style>
+</head>
+<body>
+    <h1>Movie Recommendation System</h1>
+    
+    <p>Select a year or a genre from the options below, and we'll display the top movie recommendations based on your choice!</p>
+    
+    
+    <div class="form-container">
+        <!-- Year Selection Form -->
+        <form action="{{ url_for('output') }}" method="POST">
+            <label for="dropdown1">Select Year:</label>
+            <select name="dropdown1" id="dropdown1">
+                {% for year in [1927, 1959, 1975, 1990, 1991, 1994, 1995, 1996, 1997, 1998, 1999] %}
+                    <option value="{{ year }}">{{ year }}</option>
+                {% endfor %}
+            </select>
+            <button type="submit" name="button1">Submit</button>
+        </form>
+
+        <!-- Genre Selection Form -->
+        <form action="{{ url_for('output') }}" method="POST">
+            <label for="dropdown2">Select Genre:</label>
+            <select name="dropdown2" id="dropdown2">
+                {% for genre in ["Action", "Adventure", "Animation", "Drama", "Horror"] %}
+                    <option value="{{ genre }}">{{ genre }}</option>
+                {% endfor %}
+            </select>
+            <button type="submit" name="button2">Submit</button>
+        </form>
+    </div>
+
+    <div class="login-signup">
+        <a href="{{ url_for('login') }}">Login</a>
+        <a href="{{ url_for('signup') }}">Sign Up</a>
+        <a href="{{ url_for('about') }}">About</a>
+    </div>
+</body>
+</html>

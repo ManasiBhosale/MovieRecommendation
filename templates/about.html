@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        body {
+            background-color: #f0f8ff;
+            font-family: 'Arial', sans-serif;
+            padding: 30px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        main p {
+            font-size: 1.2em;
+            margin: 20px 0;
+            line-height: 1.6;
+        }
+
+        .features-list {
+            text-align: center;
+            font-size: 1.2em;
+            margin-top: 20px;
+            list-style-type: decimal;
+            display: inline-block;
+            text-align: left;
+        }
+
+        .features-list li {
+            margin-bottom: 10px;
+        }
+
+        .feature-icon {
+            width: 50px;
+            height: 50px;
+            margin-right: 10px;
+            vertical-align: middle;
+        }
+
+        .btn {
+            font-size: 1.2em;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+
+        .btn:hover {
+            background-color: #45a049;
+        }
+
+        .steps-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 40px;
+        }
+
+        .step-item {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .step-item img {
+            width: 400px;  /* Set a fixed width for consistency */
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .step-item h3 {
+            font-size: 1.5em;
+            color: #333;
+            margin-top: 10px;
+        }
+
+        .step-item p {
+            font-size: 1.1em;
+            color: #555;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>About This Movie Recommendation System</h1>
+    </header>
+
+    <main>
+        <p>
+            The Movie Recommendation System is a powerful tool designed to help you discover new movies based on your preferences. 
+            It utilizes advanced algorithms that analyze your selected movie genres, years, and ratings to suggest films you’re most likely to enjoy. 
+            Whether you are a fan of action-packed blockbusters or heartwarming dramas, this system allows you to explore a variety of movies based on the genres you choose. 
+            Additionally, you can refine the suggestions by selecting movies you've already watched, allowing the system to offer more personalized recommendations.
+            This interactive platform makes it easy and fun to find your next favorite movie, saving you time and effort searching for recommendations. 
+            The system works seamlessly on any device, offering an intuitive interface that even novice users can navigate with ease.
+        </p>
+
+        <h2>Features of the Movie Recommendation System:</h2>
+        <ul class="features-list">
+            <li><img src="https://img.icons8.com/ios/452/movie.png" alt="Movie Icon" class="feature-icon">Choose from various movie genres like Action, Drama, Horror, and more.</li>
+            <li><img src="https://img.icons8.com/ios/452/time-machine.png" alt="Year Icon" class="feature-icon">Select your preferred movie year to get recommendations from different decades.</li>
+            <li><img src="https://img.icons8.com/ios/452/like.png" alt="Rating Icon" class="feature-icon">Get movie recommendations based on high user ratings.</li>
+            <li><img src="https://img.icons8.com/ios/452/refresh.png" alt="Personalized Icon" class="feature-icon">The more movies you select, the more personalized the recommendations become.</li>
+        </ul>
+
+        <h2>How to Use the System:</h2>
+        <div class="steps-container">
+            <!-- Step 1: Select Genre or Year -->
+            <div class="step-item">
+                <h3>Step 1: Select Genre or Year</h3>
+                <p>Select a movie genre or year from the dropdown list.</p>
+                <img src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExd3dycXVvN25weTJ2azB0enNnNGptczgyMDN2ZjU2Njh6M2tybWF4MSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/lJNoBCvQYp7nq/giphy.gif" alt="Select Genre or Year Gif">
+            </div>
+
+            <!-- Step 2: Click Submit -->
+            <div class="step-item">
+                <h3>Step 2: Click Submit</h3>
+                <p>Click on the "Submit" button to see a list of recommended movies.</p>
+                <img src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExb2Q0eWYwYW1laWhqc2l0dDNjOTRvZXRtdWx1NDVkdG8xZGFzaDU3MyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3ohryiYkE0DVwdLAys/giphy.gif" alt="Click Submit Gif">
+            </div>
+
+            <!-- Step 3: More Personalized Suggestions -->
+            <div class="step-item">
+                <h3>Step 3: More Personalized Suggestions</h3>
+                <p>If you'd like more personalized suggestions, choose the movies you’ve already watched to refine the recommendations.</p>
+                <img src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExY3RhaHNqM2dwMWd2MnJsN2I0MmI3cnUwNWJpaDhjZnF1MXYxczJzcCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3qlD1t8XZA89nRzWrW/giphy.gif" alt="Choose Watched Movies Gif">
+            </div>
+        </div>
+
+        <a href="{{ url_for('home') }}" class="btn">🏠 Back to Home</a>
+    </main>
+</body>
+</html>
