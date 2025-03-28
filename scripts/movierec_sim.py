@@ -3,6 +3,7 @@ import pandas as pd
 import numpy as np
 from sklearn.metrics.pairwise import cosine_similarity
 import json
+from scipy.sparse import csr_matrix
 sys.stdout.reconfigure(encoding='utf-8')
 
 selected_ids = list(map(int, sys.argv[1:]))
