@@ -4,55 +4,50 @@ import numpy as np
 from sklearn.metrics.pairwise import cosine_similarity
 import json
 from scipy.sparse import csr_matrix
+
 sys.stdout.reconfigure(encoding='utf-8')
 
 selected_ids = list(map(int, sys.argv[1:]))
-#print(f"🎯 Selected movie IDs: {selected_ids}")
 
-# Load data
-#print("📂 Loading data...")
-ratings_data = pd.read_csv("./data/ratings.csv")
-movie_data = pd.read_csv("./data/movies.csv")
-#print("✅ Data loaded!")
+# Load data with optimized memory usage
+ratings_data = pd.read_csv(
+    "./data/ratings.csv", 
+    usecols=["userId", "movieId", "rating"], 
+    dtype={"userId": np.int32, "movieId": np.int32, "rating": np.float32}
+)
+movie_data = pd.read_csv(
+    "./data/movies.csv", 
+    usecols=["movieId", "title"], 
+    dtype={"movieId": np.int32, "title": str}
+)
 
-# Compute average ratings
-avg_ratings = ratings_data.groupby("movieId")["rating"].mean().reset_index()
-
-# Merge ratings into movie data
+# Compute average ratings and merge
+avg_ratings = ratings_data.groupby("movieId", as_index=False)["rating"].mean()
 movie_data = movie_data.merge(avg_ratings, on="movieId", how="left")
 
-# Create a user-movie matrix
-user_movie_matrix = ratings_data.pivot(index="userId", columns="movieId", values="rating").fillna(0)
-# Change
-sparse_matrix = csr_matrix(user_movie_matrix)
+# Create a sparse user-movie matrix directly
+user_movie_matrix = ratings_data.pivot_table(
+    index="userId", columns="movieId", values="rating", fill_value=0
+)
+sparse_matrix = csr_matrix(user_movie_matrix.values)
 
-# Compute similarity matrix
-#print("🔢 Calculating movie similarities...")
-#similarity_matrix = cosine_similarity(user_movie_matrix.T)
-# Change
+# Compute sparse similarity matrix
 similarity_matrix = cosine_similarity(sparse_matrix.T, dense_output=False)
 
-#sim_df = pd.DataFrame(similarity_matrix, index=user_movie_matrix.columns, columns=user_movie_matrix.columns)
+# Precompute movie ID to column index mapping
+movie_id_to_col = {movie_id: idx for idx, movie_id in enumerate(user_movie_matrix.columns)}
 
-"""
 # Get recommendations
 recommendations = {}
 for movie_id in selected_ids:
-    similar_movies = sim_df[movie_id].sort_values(ascending=False)[1:11]  # Top 5 similar movies
-    for sim_movie_id, score in similar_movies.items():
-        recommendations[sim_movie_id] = score
-"""
-
-# Change
-# Get recommendations
-recommendations = {}
-for movie_id in selected_ids:
-    if movie_id in user_movie_matrix.columns:
-        similar_movies = list(enumerate(similarity_matrix[user_movie_matrix.columns.get_loc(movie_id)].toarray().flatten()))
-        similar_movies = sorted(similar_movies, key=lambda x: x[1], reverse=True)[1:11]
+    col_idx = movie_id_to_col.get(movie_id)
+    if col_idx is not None:
+        similar_movies = similarity_matrix[col_idx].toarray().flatten()
+        top_similar = np.argsort(similar_movies)[::-1][1:11]  # Exclude self and get top 10
         
-        for sim_movie_id, score in similar_movies:
-            actual_movie_id = user_movie_matrix.columns[sim_movie_id]
+        for sim_idx in top_similar:
+            actual_movie_id = user_movie_matrix.columns[sim_idx]
+            score = similar_movies[sim_idx]
             recommendations[actual_movie_id] = score
 
 # Sort recommendations by similarity score
@@ -65,7 +60,5 @@ recommended_movies = movie_data[movie_data["movieId"].isin(recommended_movie_ids
 recommended_movies_list = recommended_movies.to_dict(orient='records')
 
 # Return recommendations as JSON
-#print("✅ Recommendations prepared!")
 print(json.dumps(recommended_movies_list, ensure_ascii=False))
 sys.stdout.flush()
-
