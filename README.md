@@ -6,7 +6,7 @@ This project is a Movie Recommendation System that suggests movies based on user
 
 - **User Interaction**: Users can input their watched movies to receive tailored recommendations.
 - **Data-Driven Suggestions**: Utilizes the MovieLens dataset to generate accurate recommendations.
-- **Web Interface**: A simple and intuitive web interface built with Flask.
+- **Web Interface**: A simple and intuitive web interface built with Flask.
 
 ## Dataset
 
