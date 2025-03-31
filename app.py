@@ -3,6 +3,7 @@ import subprocess
 import os
 import json
 import pandas as pd
+import time
 
 app = Flask(__name__)
 app.secret_key = "your_secret_key"  # Required for session handling
@@ -62,11 +63,22 @@ def recommend_more():
     if not watched_movie_ids:
         return "⚠️ Please select at least one movie!"
 
+    # Record the start time
+    start_time = time.time()
+    
     # Run the recommendation script with selected movie IDs
     result = subprocess.run(
         ["python", os.path.join(SCRIPTS_DIR, "movierec_sim.py")] + watched_movie_ids,
         capture_output=True, text=True, encoding="utf-8"
     )
+
+    # Record the end time
+    end_time = time.time()
+    
+    # Calculate the total time taken
+    total_time = end_time - start_time
+    print(f"⏱️ Total Time for Process: {total_time:.2f} seconds")
+    
     print("📌 Script Output:", result.stdout)
     print("❌ Script Error:", result.stderr)
 
