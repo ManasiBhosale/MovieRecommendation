@@ -122,6 +122,10 @@ Below are images showcasing the application in action:
    - Select movies you have already watched to improve recommendation accuracy.
    - Receive personalized movie suggestions based on similar users' ratings.
 
+4. **Visit the Live Demo:**  
+   - Check out the hosted website here: [Movie Recommendation System on Render](https://movierecommendation-lxjd.onrender.com/)  
+
+
 ## Project Structure
 
 - **`app.py`**: Main Flask application file.
