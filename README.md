@@ -77,7 +77,7 @@ Below are images showcasing the application in action:
 
 **5. Final Recommendations** - Movies recommended based on the user’s previous selections.
 
-![More_Recommend2](https://github.com/ManasiBhosale/MovieRecommendation/blob/bd46b07724eb088f796e58a1ffe65d5b29e11cb8/Images/more_recommend2.png)
+![More_Recommend2](https://github.com/ManasiBhosale/MovieRecommendation/blob/5a03ee9d20afaeba72684c44f1ba577b05bf24e6/Images/more_recommend2_1.png)
 
 
 ## Installation
