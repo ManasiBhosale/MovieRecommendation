@@ -2,6 +2,14 @@
 
 This project is a Movie Recommendation System that suggests movies based on user preferences and viewing history. Built with Flask, it provides an interactive web interface for users to receive personalized movie recommendations.
 
+---
+### 🎬 Want to Know How This Was Built?
+
+I wrote a full walkthrough on how this project works — from data prep to recommendation logic — all without fancy ML! <br />   
+👉 [**Read the blog on Medium**](https://medium.com/@manasibhosale1103/how-you-can-build-a-movie-recommender-from-scratch-no-fancy-ml-needed-dcb0ccaf1159)
+
+---
+
 ## Features
 
 - **User Interaction**: Users can input their watched movies to receive tailored recommendations.
