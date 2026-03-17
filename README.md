@@ -2,12 +2,15 @@
 <h1 style="display: flex; align-items: center; gap: 10px; margin: 0;">
   Movie Recommendation System
   <img
-    src="https://github.com/ManasiBhosale/MovieRecommendation/blob/d6a061f896fda456689c707842c587adce0e10ec/Images/Pop%20Corn%20Sticker%20by%20Capivarinha.gif"
-    alt="Alexa Emoji"
+    src="https://github.com/ManasiBhosale/MovieRecommendation/blob/a2f1ddcd7a6e60b2947d527e8f8f346ae0322b23/Images/tenor.gif"
+    alt="Clapper Board"
     width="80"
     align="absmiddle"
+    style="position: relative; top: -30px;"
   />
 </h1>
+
+
 
 
 This project is a Movie Recommendation System that suggests movies based on user preferences and viewing history. Built with Flask, it provides an interactive web interface for users to receive personalized movie recommendations.
